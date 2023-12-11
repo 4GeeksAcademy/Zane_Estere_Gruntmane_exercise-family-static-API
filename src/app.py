@@ -26,15 +26,17 @@ def sitemap():
     return generate_sitemap(app)
 
 @app.route('/members', methods=['GET'])
-def handle_hello():
+def all_family_members(): 
+    response_body = jsonify(members)
+    return json_text
 
-    # this is how you can use the Family datastructure by calling its methods
-    members = jackson_family.get_all_members()
-    response_body = {
-        "hello": "world",
-        "family": members
-    }
-
+@app.route('/members', methods=['GET'])
+def handle_add_member():
+    jason_data = request.get_json()
+    required_key = ["first_name", "age", "lucky_number"]
+    for key in requered_key:
+        if key not in json_data:
+            return f"missing{key} key from requested body", 400
 
     return jsonify(response_body), 200
 
