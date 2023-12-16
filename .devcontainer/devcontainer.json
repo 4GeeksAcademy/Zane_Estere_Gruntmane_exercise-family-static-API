@@ -13,6 +13,13 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"onCreateCommand": "pipenv install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"rangav.vscode-thunder-client"
+			]
+		}
+	},
 
 	// Configure tool-specific properties.
 	// "customizations": {},

@@ -10,31 +10,30 @@ from random import randint
 
 class FamilyStructure:
     def __init__(self, last_name):
-        self.last_name = Jackson 
+        self.last_name = last_name 
 
         # example list of members
 
-          self._members = [
-        {
-            "id": self_generatedId()
-            "first_name": "John"
-            "last_name": self.last_name
-            "age": 33
-            "lucky_number": [7,13,12]
-        },
         self._members = [{
-            "id": self_generatedId()
-            "first_name": "Jane"
-            "last_name": self.last_name
-            "age": 35
-            "lucky_number": [10,14,3]
+            "id": self._generateId(),
+            "first_name": "John",
+            "last_name": self.last_name,
+            "age": 33,
+            "lucky_number": [7,13,12],
         },
-          self._members = {
-            "id": self_generatedId()
-            "first_name": "Jimmy"
-            "last_name": self.last_name
-            "age": 5
-            "lucky_number": [1]
+        {
+            "id": self._generateId(),
+            "first_name": "Jane",
+            "last_name": self.last_name,
+            "age": 35,
+            "lucky_number": [10,14,3],
+        },
+           {
+            "id": self._generateId(),
+            "first_name": "Jimmy",
+            "last_name": self.last_name,
+            "age": 5,
+            "lucky_number": [1],
         }]
 
 
@@ -44,13 +43,14 @@ class FamilyStructure:
 
     def add_member(self, member):
         inner_member = {
-            "id": self_generatId().
+            "id": self._generateId(),
             "first_name": member ["first_name"],
             "last_name": self.last_name,
-            "age": member["age"]
-            "lucky_number": member ["lucky_number"]
+            "age": member["age"],
+            "lucky_number": member ["lucky_number"],
         }
-        pass
+        self._members.append(inner_member)
+        return inner_member
 
     def delete_member(self, id):
         # fill this method and update the return
