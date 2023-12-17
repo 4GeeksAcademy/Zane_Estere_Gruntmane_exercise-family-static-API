@@ -53,11 +53,18 @@ class FamilyStructure:
         return inner_member
 
     def delete_member(self, id):
-        # fill this method and update the return
+
+        if id in self.member:
+            del self.member(id)
+            return True
+        else:
+            return False
         pass
 
     def get_member(self, id):
-        # fill this method and update the return
+         if id in self.member:
+            return 
+        
         pass
 
     # this method is done, it returns a list with all the family members

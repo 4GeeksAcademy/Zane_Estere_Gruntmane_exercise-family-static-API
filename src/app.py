@@ -33,7 +33,7 @@ def all_family_members():
     }
     return jsonify(response_body), 200
 
-@app.route('/member', methods=['POST'])
+@app.route('/members/', methods=['POST'])
 def handle_add_member():
     json_data = request.get_json()
     required_key = ["first_name", "age", "lucky_number"]
@@ -42,31 +42,31 @@ def handle_add_member():
             return f"missing {key} key from request body", 400
         
     new_member = {
-         "first_name" : json_data ["first_name"],
+        "first_name" : json_data ["first_name"],
         "age" : json_data ["age"],
         "lucky_number":  json_data ["lucky_number"],
     }
     inner_member_data = jackson_family.add_member(new_member)
     return jsonify (inner_member_data ), 201
 
-@app.route ('/member/',  methods=['DELETE'])
-def handle_delete_member():
-    json_data=request.get_json()
+@app.route ('/members/',  methods=['DELETE'])
+def handle_delete_member(id):
+    
+    id == "member_id"
 
-    delete_member_by_id = json_data.get("member_id")
-
-    if delete_member_by_id is None:
-        return jsonify({"error": "Cannot find member_id in request body"}), 400
-        
-    deleted_member = jackson_family.delete_member(delete_member_by_id)
-
-    deleted_member = jackson_family.delete_member(delete_member_by_id)
+    deleted_member = jackson_family.delete_member("member_id")
 
     if deleted_member:
-        response_body = {"done": True}
-        return jsonify(response_body), 200
-    else:
-        return jsonify({"error": "Member not found"}), 404
+        return jsonify({"done": True}), 200
+    else: 
+        return jsonify({"error": "Member not found"}), 400 
+    
+@app.route ('/members/', methods = ['GET'])
+
+def  handle_get_member (id):
+    response = request.get (id)
+    response.json()
+        
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
