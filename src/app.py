@@ -33,6 +33,16 @@ def all_family_members():
     }
     return jsonify(response_body), 200
 
+@app.route('/member/<int:member_id>', methods=["GET"])
+def handle_get_a_member(member_id):
+    member = jackson_family.get_a_member(member_id)
+
+    if member is None:
+        return jsonify({"error": "Member not found"}), 404
+
+    return jsonify(member), 200
+
+
 @app.route('/members/', methods=['POST'])
 def handle_add_member():
     json_data = request.get_json()
@@ -49,26 +59,13 @@ def handle_add_member():
     inner_member_data = jackson_family.add_member(new_member)
     return jsonify (inner_member_data ), 201
 
-@app.route ('/members/',  methods=['DELETE'])
-def handle_delete_member(id):
-    
-    id == "member_id"
+@app.route('/member/<int:member_id>', methods=['DELETE'])
+def handle_delete_member(member_id):
+    message = jackson_family.delete_member(member_id)
+    return jsonify(message), 200
 
-    deleted_member = jackson_family.delete_member("member_id")
-
-    if deleted_member:
-        return jsonify({"done": True}), 200
-    else: 
-        return jsonify({"error": "Member not found"}), 400 
-    
-@app.route ('/members/', methods = ['GET'])
-
-def  handle_get_member (id):
-    response = request.get (id)
-    response.json()
-        
 
 # this only runs if `$ python src/app.py` is executed
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3000))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+if __name__ == "__main__":
+    PORT = int(os.environ.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=PORT, debug=True)
